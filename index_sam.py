@@ -3,7 +3,7 @@
 """index_sam.py circumvents the inability of samtools 1.7 to give index statistics straight from sam files.
 it automates the sequential use of samtools 'sort', 'index' and 'idxstats'
 , to ultimately gain index stats from an input directory of sam files
-usage : index_sam.py(sam_directory)
+usage : index_sam.py <sam_directory>
 #sam_directory : directory containing the sam files to be sorted and indexed"""
 
 import sys
