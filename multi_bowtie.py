@@ -47,7 +47,7 @@ if __name__ == '__main__':
 	sam = sam_names(args.fq_directory, args.bowtie_index)
 	loop_index = 0
 	for sam_value in sam:
-		subprocess.call(['bowtie2', '--score-min "C,0,-1"', '-x', args.bowtie_index, '-U', fastq[loop_index], '-S', sam[loop_index]]) #added in score min for 0 mismatches
+		subprocess.call(['bowtie2', '--score-min C,0,0', '-x', args.bowtie_index, '-U', fastq[loop_index], '-S', sam[loop_index]]) #added in score min for 0 mismatches
 		print('Created file called {}'.format(sam[loop_index]) )
 		loop_index += 1 #so that it will go to the next value in the list
 
