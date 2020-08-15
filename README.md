@@ -7,3 +7,9 @@ Allopolyploid species are formed from mating between species that also causes in
 Given the natural variability in gene expression between organisms of the same species, transcriptomic analyses are best performed using biological replicates for each constituent member of the study system.
 
 The scripts `multi_bowtie.py` and `index_sam.py` were written in python, for successive use to automate the processing of a directory of fastq files.
+
+## Installation
+To install `multi_bowtie.py` and `index_sam.py`, first clone the **multi_bowtie** repository.
+```python
+git clone https://github.com/annabehling/multi_bowtie
+```
