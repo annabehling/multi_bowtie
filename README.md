@@ -33,7 +33,7 @@ A script is needed to automate this stage as the `SolexaQA++ lengthsort` functio
 The quality-trimmed and length-sorted files have the extension `.fastq.trimmed.single`.
 
 ## Running
-Now, to perform the stringent mapping with Bowtie2.
+Now, to perform the stringent mapping with Bowtie2. What makes this mapping highly stringent is the ...
 
 The first step is to build a reference database from the gene sequences that the quality filtered reads will be mapped against.
 Move to the directory where the reference gene sequences `gene_file.fasta` are, run:
@@ -51,3 +51,6 @@ Lastly, use `index_sam.py` to gain index statistics from the resulting SAM files
 python3 index_sam.py .
 ```
 
+## Output
+The above code produces a number of tsv files containing Bowtie2 index statistics; one tsv file for each original fastq file.
+Each tsv file has four columns: reference sequence name, sequence length, number of mapped reads, number of unmapped reads. Example tsv files can be found [here](https://github.com/annabehling/multi_bowtie/files)
