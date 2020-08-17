@@ -29,7 +29,7 @@ Finally, to keep only reads whose length is greater than 50 bp, in the same dire
 ```
 python3 auto_trim.py .         
 ```
-
+A script is needed to automate this stage as the `SolexaQA++ lengthsort` function can only take one single-end fastq file as an argument at a time.
 The quality-trimmed and length-sorted files have the extension `.fastq.trimmed.single`.
 
 ## Running
@@ -50,3 +50,4 @@ Lastly, use `index_sam.py` to gain index statistics from the resulting SAM files
 ```
 python3 index_sam.py .
 ```
+
