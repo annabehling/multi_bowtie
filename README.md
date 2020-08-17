@@ -13,3 +13,21 @@ To install `multi_bowtie.py` and `index_sam.py`, first clone the **multi_bowtie*
 ```python
 git clone https://github.com/annabehling/multi_bowtie
 ```
+
+## Preliminary quality filtering
+There are a number of optional or prerequisite steps before the implementation of `multi_bowtie.py` and `index_sam.py`. To ensure that the RNA-seq reads are being mapped accurately (high quality) and unambiguously (adequate length), they can be filtered and trimmed using [SolexaQA](http://solexaqa.sourceforge.net/).
+
+First, [download the latest version](https://sourceforge.net/projects/solexaqa/files/) of SolexaQA.
+
+Next, to filter the reads to have a phred score greater than 30, move to the directory containing the fastq files and run:
+```python
+SolexaQA++ dynamictrim -h 30 *.fastq
+```
+
+The quality-trimmed files have the extension `.fastq.trimmed`.
+Finally, to keep only reads whose length is greater than 50 bp, in the same directory run:
+```python
+python3 auto_trim.py .         
+```
+
+The quality-trimmed and length-sorted files have the extension `.fastq.trimmed.single`.
