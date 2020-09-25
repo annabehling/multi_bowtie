@@ -60,3 +60,10 @@ Functions and example code for processing these output files into a format suita
 ## Visualisations
 
 Once the code in `multi_bowtie_vis.R` has been run, the resulting figure should look like this:
+![Image of example visualisation](files/bowtie_v_hylite.png)
+
+Points on the plots have 30\% opacity, to emphasise overlap. Each plot shows a linear trend line (x = y).
+
+The high correlation coefficients (0.82-0.99) produced from the regression analysis of the HyLiTE and stringent mapping read count data gives confidence in the HyLiTE data, in addition to the limited variation from a linear trend line. The regression analyses are not centered on the linear trend lines because the high stringency mapping was performed with no mismatches, in addition to the preliminary quality filtering.
+
+The example output visualisation, `bowtie_v_hylite.png` can be also found in `files`.
