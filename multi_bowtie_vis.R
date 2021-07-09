@@ -14,7 +14,7 @@ import_idxstats <- function(stats_dir){
   stats_tables <- lapply(fnames, read.table, sep = "\t") #read in list of tsv files
   basenames <- lapply(fnames, basename) #get just file name
   base_stem <- lapply(basenames, strsplit, "[./]") #split on "." to get the stem of the file name
-  names(stats_tables) <- sapply(base_stem, function(x) x[[1]][1]) #assumes no other . in file name
+  names(stats_tables) <- sapply(base_stem, function(x) lapply(x, "[[", 1)) #assumes no other . in file name
   stats_tables
 }
 
