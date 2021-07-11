@@ -1,7 +1,7 @@
 # multi_bowtie
-Allopolyploid species are formed from mating between species that also causes in an increase in the chromosomal complement of the resulting hybrid offspring. Homoploid hybrid species also form from interspecific mating, but inherit the same number of chromosomes as their parental species.
+Allopolyploids are formed from mating between species that also causes in an increase in the chromosomal complement of the resulting hybrid offspring. Homoploid hybrid species also form from interspecific mating, but inherit the same number of chromosomes as their parental species.
 
-[HyLiTE](https://hylite.sourceforge.io/index.html) is a program capable of assigning parental origin to high-throughput RNA-seq reads from allopolyploid and homoploid hybrids, through its implementation of [Bowtie 2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml). Usage of HyLiTE is significantly less frequent and widespread than Bowtie 2. To validate HyLiTE data, one can generate read count matrices in Bowtie 2 and compare these to the read count matrices generated for the same data by HyLiTE.
+[HyLiTE](https://hylite.sourceforge.io/index.html) is a program capable of assigning parental origin to high-throughput RNA-seq reads from allopolyploid and homoploid hybrids, through its implementation of [Bowtie 2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml). Usage of HyLiTE is much less frequent and widespread than Bowtie 2. To validate HyLiTE data, one can generate read count matrices in Bowtie 2 and compare these to the read count matrices generated for the same data by HyLiTE. For the HyLiTE data to be considered robust, we would expect a high correlation coefficient from the regression analysis of the Bowtie 2 and HyLiTE read count data.
 
 ## Description
 Given the natural variability in gene expression between organisms of the same species, transcriptomic analyses are best performed using biological replicates for each constituent member of the study system.
@@ -60,9 +60,10 @@ Functions and example code for processing these output files into a format suita
 ## Visualisations
 
 Once the code in `multi_bowtie_vis.R` has been run, the resulting figure should look like this:
+
 ![Image of example visualisation](files/bowtie_v_hylite.png)
 
-Points on the plots have 30\% opacity, to emphasise overlap. Each plot shows a linear trend line (x = y).
+Data is shown for two replicates (L-R) of the parental species *Gossypium arboreum* and *Gossypium raimondii*, and their homoploid hybrid. Points on the plots have 30\% opacity, to emphasise overlap. Each plot shows a linear trend line (x = y).
 
 The high correlation coefficients (0.82-0.99) produced from the regression analysis of the HyLiTE and stringent mapping read count data gives confidence in the HyLiTE data, in addition to the limited variation from a linear trend line. The regression analyses are not centered on the linear trend lines because the high stringency mapping was performed with no mismatches, in addition to the preliminary quality filtering.
 
