@@ -55,7 +55,7 @@ python3 index_sam.py .
 The above code produces a number of tsv files containing Bowtie 2 index statistics; one tsv file for each original fastq file.
 Each tsv file has four columns: reference sequence name, sequence length, number of mapped reads, number of unmapped reads. Example tsv files can be found [here](https://github.com/annabehling/multi_bowtie/tree/master/files).
 
-Functions and example code for processing these output files into a format suitable for visualisation can be found in `multi_bowtie_vis.R`.
+Functions and example code for processing these output files into a format suitable for visualisation can be found in `multi_bowtie_vis.R`. These have been tested to work on R version 4.0.3.
 
 ## Visualisations
 
