@@ -1,4 +1,4 @@
-##load libraries
+## load libraries
 
 library(ggplot2)
 library(gridExtra)
@@ -32,14 +32,13 @@ merge_tables <- function(hylite_exp_file, bowtie_idxstats){
 ## example
 
 # read in the HyLiTE expression.txt file
-HH_p_exp <- read.table("HH_p_hylite.expression.txt", sep = "\t", header = TRUE)
+HH_p_exp <- read.table("./files/HH_p_hylite.expression.txt", sep = "\t", header = TRUE)
 
 # import the Bowtie2 index statistics
-idx_tabs <- import_idxstats(".")
+idx_tabs <- import_idxstats("./files/")
 
 # merge the expression.txt file with each element of the list of index statistics
 merged_tabs <- lapply(idx_tabs, merge_tables, hylite_exp_file = HH_p_exp)
-
 
 # plotting each replicate and calculating correlation coefficients
 ga1ga_cor <- round(cor(x=merged_tabs$G_a_rep1_clstr_db$G_arboreum.G_a_rep1, y=merged_tabs$G_a_rep1_clstr_db$V3), 2) # calculate correlation to 2 dp
