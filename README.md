@@ -71,3 +71,7 @@ Data is shown for two replicates (L-R) of the parental species *Gossypium arbore
 The high correlation coefficients (0.82-0.99) produced from the regression analysis of the HyLiTE and stringent mapping read count data gives confidence in the HyLiTE data, as does the limited variation from a linear trend line. The regression analyses are not centered on the linear trend lines because the high stringency mapping was performed with no mismatches, in addition to the preliminary quality filtering.
 
 The example output visualisation, `bowtie_v_hylite.png` can be also found in `files/`.
+
+## Additional code
+
+This repository also contains the file `igv_picker.R` which can be used to generate short-lists of candidate genes in the high, mid and low expression categories for manual IGV mapping. This has also been tested to work on R version 4.0.3.
