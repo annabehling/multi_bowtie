@@ -14,6 +14,8 @@ To install the required scripts, first clone the **multi_bowtie** repository.
 git clone https://github.com/annabehling/multi_bowtie
 ```
 
+The following sections 
+
 ## Preliminary quality filtering
 There are a number of optional or prerequisite steps before the implementation of `multi_bowtie.py` and `index_sam.py`. To ensure that the RNA-seq reads are being mapped accurately (high quality) and unambiguously (adequate length), they can be filtered and trimmed using [SolexaQA](http://solexaqa.sourceforge.net/).
 
@@ -24,7 +26,8 @@ Next, to filter the reads to have a phred score greater than 30, move to the dir
 SolexaQA++ dynamictrim -h 30 *.fastq
 ```
 
-The quality-trimmed files have the extension `.fastq.trimmed`
+The quality-trimmed files have the extension `.fastq.trimmed`.
+
 Finally, to keep only reads whose length is greater than 50 bp, in the same directory run `auto_trim.py`:
 ```
 python3 auto_trim.py .         
@@ -53,7 +56,7 @@ python3 index_sam.py .
 
 ## Output
 The above code produces a number of tsv files containing Bowtie 2 index statistics; one tsv file for each original fastq file.
-Each tsv file has four columns: reference sequence name, sequence length, number of mapped reads, number of unmapped reads. Example tsv files can be found [here](https://github.com/annabehling/multi_bowtie/tree/master/files).
+Each tsv file has four columns: reference sequence name, sequence length, number of mapped reads, number of unmapped reads. Example tsv files can be found [here](https://github.com/annabehling/multi_bowtie/tree/master/files "example tsv files").
 
 Functions and example code for processing these output files into a format suitable for visualisation can be found in `multi_bowtie_vis.R`. These have been tested to work on R version 4.0.3.
 
@@ -63,8 +66,8 @@ Once the code in `multi_bowtie_vis.R` has been run, the resulting figure should 
 
 ![Image of example visualisation](files/bowtie_v_hylite.png)
 
-Data is shown for two replicates (L-R) of the parental species *Gossypium arboreum* and *Gossypium raimondii*, and their homoploid hybrid. Points on the plots have 30\% opacity, to emphasise overlap. Each plot shows a linear trend line (x = y).
+Data is shown for two replicates (L-R) of the parental species *Gossypium arboreum* and *G. raimondii*, and their homoploid hybrid. Points on the plots have 30\% opacity, to emphasise overlap. Each plot shows a linear trend line (x = y).
 
-The high correlation coefficients (0.82-0.99) produced from the regression analysis of the HyLiTE and stringent mapping read count data gives confidence in the HyLiTE data, in addition to the limited variation from a linear trend line. The regression analyses are not centered on the linear trend lines because the high stringency mapping was performed with no mismatches, in addition to the preliminary quality filtering.
+The high correlation coefficients (0.82-0.99) produced from the regression analysis of the HyLiTE and stringent mapping read count data gives confidence in the HyLiTE data, as does the limited variation from a linear trend line. The regression analyses are not centered on the linear trend lines because the high stringency mapping was performed with no mismatches, in addition to the preliminary quality filtering.
 
-The example output visualisation, `bowtie_v_hylite.png` can be also found in `files`.
+The example output visualisation, `bowtie_v_hylite.png` can be also found in `files/`.
