@@ -14,7 +14,9 @@ To install the required scripts, first clone the **multi_bowtie** repository.
 git clone https://github.com/annabehling/multi_bowtie
 ```
 
-The following sections 
+## File note
+
+The code in the following sections (**Preliminary quality filtering** and **Running**) requires similar input to HyLiTE: a directory of `fastq` files and a reference gene sequence `fasta` file. These have not been provided here. However, example output `tsv` files used in later visualisations have been provided.
 
 ## Preliminary quality filtering
 There are a number of optional or prerequisite steps before the implementation of `multi_bowtie.py` and `index_sam.py`. To ensure that the RNA-seq reads are being mapped accurately (high quality) and unambiguously (adequate length), they can be filtered and trimmed using [SolexaQA](http://solexaqa.sourceforge.net/).
