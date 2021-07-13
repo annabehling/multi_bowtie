@@ -40,8 +40,8 @@ The quality-trimmed and length-sorted files have the extension `.fastq.trimmed.s
 ## Running
 Now, to perform the stringent mapping with Bowtie 2. What makes this mapping highly stringent is the allowance of zero mismatches during the mapping process.
 
-The first step is to build a reference database from the gene sequences that the quality filtered reads will be mapped against.
-Move to the directory where the reference gene sequences `gene_file.fasta` are, and run:
+The first step is to build a reference database from the gene sequences that the quality filtered reads will be mapped against.  
+In the directory containing the reference gene sequences `gene_file.fasta`, quality filtered reads, and scripts, run:
 ```
 bowtie2-build -f gene_file.fasta db_name
 ```
