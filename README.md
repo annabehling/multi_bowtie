@@ -80,4 +80,4 @@ The example output visualisation, `bowtie_v_hylite.png` can be also found in `ex
 
 ## Additional code
 
-This repository also contains the file `igv_picker.R` which can be used to generate short-lists of candidate genes in the high, mid and low expression categories for manual IGV mapping. This has also been tested to work on R version 4.0.3.
+This repository also contains the file `igv_picker.R` which can be used to generate short-lists of candidate genes in the high, mid and low expression categories for manual IGV mapping. This has also been tested to work on R version 4.0.3. Note: with these reduced example RNA-seq files, the code does not identify any candidate genes.
