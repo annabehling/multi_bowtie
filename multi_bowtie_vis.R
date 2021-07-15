@@ -32,87 +32,73 @@ merge_tables <- function(hylite_exp_file, bowtie_idxstats){
 ## example
 
 # read in the HyLiTE expression.txt file
-HH_p_exp <- read.table("./files/HH_p_hylite.expression.txt", sep = "\t", header = TRUE)
+HH_p_exp <- read.table("./example_outfiles/HH_p_hylite.expression.txt", sep = "\t", header = TRUE)
 
 # import the Bowtie2 index statistics
-idx_tabs <- import_idxstats("./files/")
+idx_tabs <- import_idxstats("./example_outfiles/")
 
 # merge the expression.txt file with each element of the list of index statistics
 merged_tabs <- lapply(idx_tabs, merge_tables, hylite_exp_file = HH_p_exp)
 
 # plotting each replicate and calculating correlation coefficients
-ga1ga_cor <- round(cor(x=merged_tabs$G_a_rep1_clstr_db$G_arboreum.G_a_rep1, y=merged_tabs$G_a_rep1_clstr_db$V3), 2) # calculate correlation to 2 dp
-ga1ga_plot <- ggplot(merged_tabs$G_a_rep1_clstr_db, aes(G_arboreum.G_a_rep1, V3)) + 
+ga1ga_cor <- round(cor(x=merged_tabs$G_a_rep1_db_name$G_arboreum.G_a_rep1, y=merged_tabs$G_a_rep1_db_name$V3), 2) # calculate correlation to 2 dp
+ga1ga_plot <- ggplot(merged_tabs$G_a_rep1_db_name, aes(G_arboreum.G_a_rep1, V3)) + 
   geom_point(alpha = 0.3) + # 30% opacity
   xlab("HyLiTE") + ylab("Bowtie2") + ggtitle("G. arboreum (rep 1)") +
-  scale_y_continuous(breaks = seq(0, 40000, by = 20000)) +
   geom_abline() + annotate(geom = "text", x = -Inf, y = Inf, hjust = -4, vjust = 5, label = paste0("r = ", ga1ga_cor)) +
   theme_bw() +
   theme(panel.background = element_rect(colour = "black", size = 0.5),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title = element_text(face="bold"))
+        panel.grid.minor = element_blank())
 
-ga2ga_cor <- round(cor(x=merged_tabs$G_a_rep2_clstr_db$G_arboreum.G_a_rep2, y=merged_tabs$G_a_rep2_clstr_db$V3), 2)
-ga2ga_plot <- ggplot(merged_tabs$G_a_rep2_clstr_db, aes(G_arboreum.G_a_rep2, V3)) + 
+ga2ga_cor <- round(cor(x=merged_tabs$G_a_rep2_db_name$G_arboreum.G_a_rep2, y=merged_tabs$G_a_rep2_db_name$V3), 2)
+ga2ga_plot <- ggplot(merged_tabs$G_a_rep2_db_name, aes(G_arboreum.G_a_rep2, V3)) + 
   geom_point(alpha = 0.3) + 
   xlab("HyLiTE") + ylab("Bowtie2") + ggtitle("G. arboreum (rep 2)") +
-  scale_x_continuous(breaks = seq(0, 40000, by = 20000)) +
   geom_abline() + annotate(geom = "text", x = -Inf, y = Inf, hjust = -4, vjust = 5, label = paste0("r = ", ga2ga_cor)) +
   theme_bw() +
   theme(panel.background = element_rect(colour = "black", size = 0.5),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title = element_text(face="bold"))
+        panel.grid.minor = element_blank())
 
-gr1ga_cor <- round(cor(x=merged_tabs$G_r_rep1_clstr_db$G_raimondii.G_r_rep1, y=merged_tabs$G_r_rep1_clstr_db$V3), 2)
-gr1ga_plot <- ggplot(merged_tabs$G_r_rep1_clstr_db, aes(G_raimondii.G_r_rep1, V3)) + 
+gr1ga_cor <- round(cor(x=merged_tabs$G_r_rep1_db_name$G_raimondii.G_r_rep1, y=merged_tabs$G_r_rep1_db_name$V3), 2)
+gr1ga_plot <- ggplot(merged_tabs$G_r_rep1_db_name, aes(G_raimondii.G_r_rep1, V3)) + 
   geom_point(alpha = 0.3) + 
   xlab("HyLiTE") + ylab("Bowtie2") + ggtitle("G. raimondii (rep 1)") + 
   geom_abline() + annotate(geom = "text", x = -Inf, y = Inf, hjust = -4, vjust = 5, label = paste0("r = ", gr1ga_cor)) +
   theme_bw() +
   theme(panel.background = element_rect(colour = "black", size = 0.5),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title = element_text(face="bold"))
+        panel.grid.minor = element_blank())
 
-gr2ga_cor <- round(cor(x=merged_tabs$G_r_rep2_clstr_db$G_raimondii.G_r_rep2, y=merged_tabs$G_r_rep2_clstr_db$V3), 2)
-gr2ga_plot <- ggplot(merged_tabs$G_r_rep2_clstr_db, aes(G_raimondii.G_r_rep2, V3)) + 
+gr2ga_cor <- round(cor(x=merged_tabs$G_r_rep2_db_name$G_raimondii.G_r_rep2, y=merged_tabs$G_r_rep2_db_name$V3), 2)
+gr2ga_plot <- ggplot(merged_tabs$G_r_rep2_db_name, aes(G_raimondii.G_r_rep2, V3)) + 
   geom_point(alpha = 0.3) + 
   xlab("HyLiTE") + ylab("Bowtie2") + ggtitle("G. raimondii (rep 2)") + 
   geom_abline() + annotate(geom = "text", x = -Inf, y = Inf, hjust = -4, vjust = 5, label = paste0("r = ", gr2ga_cor)) +
   theme_bw() + 
   theme(panel.background = element_rect(colour = "black", size = 0.5),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title = element_text(face="bold"))
+        panel.grid.minor = element_blank())
 
-gh1ga_cor <- round(cor(x=merged_tabs$G_HH_rep1_clstr_db$G_arboreum_x_raimondii.G_HH_rep1, y=merged_tabs$G_HH_rep1_clstr_db$V3), 2)
-gh1ga_plot <- ggplot(merged_tabs$G_HH_rep1_clstr_db, aes(G_arboreum_x_raimondii.G_HH_rep1, V3)) + 
+gh1ga_cor <- round(cor(x=merged_tabs$G_HH_rep1_db_name$G_arboreum_x_raimondii.G_HH_rep1, y=merged_tabs$G_HH_rep1_db_name$V3), 2)
+gh1ga_plot <- ggplot(merged_tabs$G_HH_rep1_db_name, aes(G_arboreum_x_raimondii.G_HH_rep1, V3)) + 
   geom_point(alpha = 0.3) + 
   xlab("HyLiTE") + ylab("Bowtie2") + ggtitle("Homoploid hybrid (rep 1)") + 
   geom_abline() + annotate(geom = "text", x = -Inf, y = Inf, hjust = -4, vjust = 5, label = paste0("r = ", gh1ga_cor)) +
   theme_bw() + 
   theme(panel.background = element_rect(colour = "black", size = 0.5),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title = element_text(face="bold"))
+        panel.grid.minor = element_blank())
 
-gh2ga_cor <- round(cor(x=merged_tabs$G_HH_rep2_clstr_db$G_arboreum_x_raimondii.G_HH_rep2, y=merged_tabs$G_HH_rep2_clstr_db$V3), 2)
-gh2ga_plot <- ggplot(merged_tabs$G_HH_rep2_clstr_db, aes(G_arboreum_x_raimondii.G_HH_rep2, V3)) + 
+gh2ga_cor <- round(cor(x=merged_tabs$G_HH_rep2_db_name$G_arboreum_x_raimondii.G_HH_rep2, y=merged_tabs$G_HH_rep2_db_name$V3), 2)
+gh2ga_plot <- ggplot(merged_tabs$G_HH_rep2_db_name, aes(G_arboreum_x_raimondii.G_HH_rep2, V3)) + 
   geom_point(alpha = 0.3) + xlab("HyLiTE") + ylab("Bowtie2") + ggtitle("Homoploid hybrid (rep 2)") + 
-  geom_abline() + annotate(geom = "text", x = -Inf, y = Inf, hjust = -4, vjust = 5, label = paste0("r = ", gh2ga_cor)) +
+  geom_abline() + annotate(geom = "text", x = -Inf, y = Inf, hjust = -5, vjust = 5, label = paste0("r = ", gh2ga_cor)) +
   theme_bw() + 
   theme(panel.background = element_rect(colour = "black", size = 0.5),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title = element_text(face="bold"))
+        panel.grid.minor = element_blank())
 
 # arrange plots on grid
 grid.arrange(ga1ga_plot, ga2ga_plot, gr1ga_plot, gr2ga_plot, gh1ga_plot, gh2ga_plot, nrow = 3)
