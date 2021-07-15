@@ -23,7 +23,7 @@ igv_picker <- function(exp_file, readsum_file){
 
 ## example
 
-candidates <- igv_picker("./files/HH_p_hylite.expression.txt", "./files/HH_p_hylite.G_arboreum_x_raimondii.G_HH_rep1.read.summary.txt") #get all candidates
+candidates <- igv_picker("./example_outfiles/HH_p_hylite.expression.txt", "./example_outfiles/HH_p_hylite.G_arboreum_x_raimondii.G_HH_rep1.read.summary.txt") #get all candidates
 
 high_genes <- candidates[candidates$P1_prop >= 75, ] #get the high expression candidate genes
 mid_genes <- candidates[(candidates$P1_prop) >= 45 & (candidates$P1_prop <= 55), ] #get the mid expression candidate genes
