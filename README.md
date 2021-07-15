@@ -6,17 +6,13 @@ Allopolyploids are formed from mating between species that also causes in an inc
 ## Description
 Given the natural variability in gene expression between organisms of the same species, transcriptomic analyses are best performed using biological replicates for each constituent member of the study system.
 
-The scripts `multi_bowtie.py` and `index_sam.py` were written in python, for successive use to automate the processing of a directory of fastq files.
+The scripts `multi_bowtie.py` and `index_sam.py` were written in python, for successive use to automate the processing of a directory of fastq files. Two replicate example fastq files have been provided for two cotton parental species *Gossypium raimondii* and *G. arboreum* ('G_r' and 'G_a') and their homoploid hybrid ('G_HH'). **For ease of use, the fastq files contain only 100,000 lines each.** An example fasta file containing gene sequences is also provided.
 
 ## Installation
 To install the required scripts, first clone the **multi_bowtie** repository.
 ```python
 git clone https://github.com/annabehling/multi_bowtie
 ```
-
-## Input
-Example input `fasta` and `fastq` files have been provided for usage.  
-**For ease of use, the fastq files only contain 100,000 lines each.**
 
 ## Preliminary quality filtering
 There are a number of optional or prerequisite steps before the implementation of `multi_bowtie.py` and `index_sam.py`. To ensure that the RNA-seq reads are being mapped accurately (high quality) and unambiguously (adequate length), they can be filtered and trimmed using [SolexaQA](http://solexaqa.sourceforge.net/ "SolexaQA").
@@ -27,7 +23,7 @@ Usage information for SolexaQA can be found [here](http://solexaqa.sourceforge.n
 chmod +x SolexaQA++
 ```
 
-Next, to filter the reads to have a phred score greater than 30, run:
+Next, to filter the reads to have a phred score greater than 30, move to the directory containing the `fastq` files and scripts, and run:
 ```
 SolexaQA++ dynamictrim -h 30 *.fastq
 ```
@@ -65,6 +61,10 @@ The above code produces a number of `tsv` files containing Bowtie 2 index statis
 Each tsv file has four columns: reference sequence name, sequence length, number of mapped reads, number of unmapped reads. Example tsv files can be found [here](https://github.com/annabehling/multi_bowtie/tree/master/example_outfiles "example tsv files").
 
 Functions and example code for processing these output files into a format suitable for visualisation can be found in `multi_bowtie_vis.R`. These have been tested to work on R version 4.0.3.
+
+The R code requires output files, namely an `expression.txt` and `read.summary.txt` file. Examples of these can also be found [here](https://github.com/annabehling/multi_bowtie/tree/master/example_outfiles "example hylite output files").
+
+Alternatively, a HyLiTE analysis can be run using the examples `fastq` and `fasta` files. Instructions on how to run a first HyLiTE analysis can be found in the [HyLiTE manual](https://hylite.sourceforge.io/tutorial.html#a-first-hylite-analysis "a first HyLiTE analysis").
 
 ## Visualisations
 
