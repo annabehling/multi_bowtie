@@ -17,8 +17,8 @@ git clone https://github.com/annabehling/multi_bowtie
 ## Preliminary quality filtering
 There are a number of optional or prerequisite steps before the implementation of `multi_bowtie.py` and `index_sam.py`. To ensure that the RNA-seq reads are being mapped accurately (high quality) and unambiguously (adequate length), they can be filtered and trimmed using [SolexaQA](http://solexaqa.sourceforge.net/ "SolexaQA").
 
-First, [download the latest version](https://sourceforge.net/projects/solexaqa/files/) of SolexaQA.  
-Usage information for SolexaQA can be found [here](http://solexaqa.sourceforge.net/). Notably, on first use, Linux and OS X users may need to make the SolexaQA++ file executable with:
+First, [download the latest version](https://sourceforge.net/projects/solexaqa/files/) of SolexaQA into the directory where the data files are.  
+Usage information for SolexaQA can be found [here](http://solexaqa.sourceforge.net/). Notably, on first use, Linux and OS X users may need to make the SolexaQA++ file executable. To do so, run the following command in a console window:
 ```
 chmod +x SolexaQA++
 ```
