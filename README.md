@@ -1,12 +1,12 @@
 # multi_bowtie
 Allopolyploids are formed from mating between species that also causes in an increase in the chromosomal complement of the resulting hybrid offspring. Homoploid hybrid species also form from interspecific mating, but inherit the same number of chromosomes as their parental species.
 
-[HyLiTE](https://hylite.sourceforge.io/index.html) is a program capable of assigning parental origin to high-throughput RNA-seq reads from allopolyploid and homoploid hybrids, through its implementation of [Bowtie 2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml). Usage of HyLiTE is much less frequent and widespread than Bowtie 2. To validate HyLiTE data, one can generate read count matrices in Bowtie 2 and compare these to the read count matrices generated for the same data by HyLiTE. For the HyLiTE data to be considered robust, we would expect a high correlation coefficient from the regression analysis of the Bowtie 2 and HyLiTE read count data.
+[HyLiTE](https://hylite.sourceforge.io/index.html) is a program capable of assigning parental origin to high-throughput RNA-seq reads from allopolyploid and homoploid hybrids, through its implementation of [Bowtie 2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml). Usage of HyLiTE is much less frequent and widespread than Bowtie 2. To validate HyLiTE data, one can generate read count matrices in Bowtie 2 and compare these to the read count matrices generated for the same data by HyLiTE. For the HyLiTE data to be considered robust, a high correlation coefficient should be produced from the regression analysis of the Bowtie 2 and HyLiTE read count data.
 
 ## Description
 Given the natural variability in gene expression between organisms of the same species, transcriptomic analyses are best performed using biological replicates for each constituent member of the study system.
 
-The scripts `multi_bowtie.py` and `index_sam.py` were written in python, for successive use to automate the processing of a directory of fastq files.
+The scripts `multi_bowtie.py` and `index_sam.py` were written in python, for successive use to automate the processing of a directory of fastq files. Two replicate example fastq files have been provided for two cotton parental species *Gossypium raimondii* and *G. arboreum* ('G_r' and 'G_a') and their homoploid hybrid ('G_HH'). **For ease of use, the fastq files contain only 100,000 lines each.** An example fasta file containing gene sequences is also provided.
 
 ## Installation
 To install the required scripts, first clone the **multi_bowtie** repository.
@@ -14,16 +14,16 @@ To install the required scripts, first clone the **multi_bowtie** repository.
 git clone https://github.com/annabehling/multi_bowtie
 ```
 
-## File note
-
-The code in the following sections (**Preliminary quality filtering** and **Running**) requires similar input to HyLiTE: a directory of `fastq` files and a reference gene sequence `fasta` file. These have not been provided here. However, example output `tsv` files used in later visualisations have been provided.
-
 ## Preliminary quality filtering
-There are a number of optional or prerequisite steps before the implementation of `multi_bowtie.py` and `index_sam.py`. To ensure that the RNA-seq reads are being mapped accurately (high quality) and unambiguously (adequate length), they can be filtered and trimmed using [SolexaQA](http://solexaqa.sourceforge.net/).
+There are a number of optional or prerequisite steps before the implementation of `multi_bowtie.py` and `index_sam.py`. To ensure that the RNA-seq reads are being mapped accurately (high quality) and unambiguously (adequate length), they can be filtered and trimmed using [SolexaQA](http://solexaqa.sourceforge.net/ "SolexaQA").
 
-First, [download the latest version](https://sourceforge.net/projects/solexaqa/files/) of SolexaQA.
+First, [download the latest version](https://sourceforge.net/projects/solexaqa/files/) of SolexaQA into the directory where the data files are.  
+Usage information for SolexaQA can be found [here](http://solexaqa.sourceforge.net/). Notably, on first use, Linux and OS X users may need to make the SolexaQA++ file executable. To do so, run the following command in a console window:
+```
+chmod +x SolexaQA++
+```
 
-Next, to filter the reads to have a phred score greater than 30, move to the directory containing the fastq files and run:
+Next, to filter the reads to have a phred score greater than 30, move to the directory containing the `fastq` files and scripts, and run:
 ```
 SolexaQA++ dynamictrim -h 30 *.fastq
 ```
@@ -32,7 +32,7 @@ The quality-trimmed files have the extension `.fastq.trimmed`.
 
 Finally, to keep only reads whose length is greater than 50 bp, in the same directory run `auto_trim.py`:
 ```
-python3 auto_trim.py .         
+python3 auto_trim.py . 
 ```
 A script is needed to automate this stage as the `SolexaQA++ lengthsort` function can only take one single-end fastq file as an argument at a time.
 The quality-trimmed and length-sorted files have the extension `.fastq.trimmed.single`.
@@ -57,23 +57,27 @@ python3 index_sam.py .
 ```
 
 ## Output
-The above code produces a number of tsv files containing Bowtie 2 index statistics; one tsv file for each original fastq file.
-Each tsv file has four columns: reference sequence name, sequence length, number of mapped reads, number of unmapped reads. Example tsv files can be found [here](https://github.com/annabehling/multi_bowtie/tree/master/files "example tsv files").
+The above code produces a number of `tsv` files containing Bowtie 2 index statistics; one tsv file for each original fastq file.
+Each tsv file has four columns: reference sequence name, sequence length, number of mapped reads, number of unmapped reads. Example tsv files can be found [here](https://github.com/annabehling/multi_bowtie/tree/master/example_outfiles "example tsv files").
 
 Functions and example code for processing these output files into a format suitable for visualisation can be found in `multi_bowtie_vis.R`. These have been tested to work on R version 4.0.3.
+
+The R code requires output files, namely an `expression.txt` and `read.summary.txt` file. Examples of these can also be found [here](https://github.com/annabehling/multi_bowtie/tree/master/example_outfiles "example hylite output files").
+
+Alternatively, a HyLiTE analysis can be run using the examples `fastq` and `fasta` files. Instructions on how to run a first HyLiTE analysis can be found in the [HyLiTE manual](https://hylite.sourceforge.io/tutorial.html#a-first-hylite-analysis "a first HyLiTE analysis").
 
 ## Visualisations
 
 Once the code in `multi_bowtie_vis.R` has been run, the resulting figure should look like this:
 
-![Image of example visualisation](files/bowtie_v_hylite.png)
+![Image of example visualisation](example_outfiles/bowtie_v_hylite.png)
 
 Data is shown for two replicates (L-R) of the parental species *Gossypium arboreum* and *G. raimondii*, and their homoploid hybrid. Points on the plots have 30\% opacity, to emphasise overlap. Each plot shows a linear trend line (x = y).
 
-The high correlation coefficients (0.82-0.99) produced from the regression analysis of the HyLiTE and stringent mapping read count data gives confidence in the HyLiTE data, as does the limited variation from a linear trend line. The regression analyses are not centered on the linear trend lines because the high stringency mapping was performed with no mismatches, in addition to the preliminary quality filtering.
+The high correlation coefficients (0.75-0.96) produced from the regression analysis of the HyLiTE and stringent mapping read count data gives confidence in the HyLiTE data, as does the limited variation from a linear trend line. The regression analyses are not centered on the linear trend lines because the high stringency mapping was performed with no mismatches, in addition to the preliminary quality filtering.
 
-The example output visualisation, `bowtie_v_hylite.png` can be also found in `files/`.
+The example output visualisation, `bowtie_v_hylite.png` can be also found in `example_outfiles/`.
 
 ## Additional code
 
-This repository also contains the file `igv_picker.R` which can be used to generate short-lists of candidate genes in the high, mid and low expression categories for manual IGV mapping. This has also been tested to work on R version 4.0.3.
+This repository also contains the file `igv_picker.R` which can be used to generate short-lists of candidate genes in the high, mid and low expression categories for manual IGV mapping. This has also been tested to work on R version 4.0.3. Note: with these reduced example RNA-seq files, the code does not identify any candidate genes.
